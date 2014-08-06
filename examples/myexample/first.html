@@ -1,0 +1,64 @@
+<html>
+<head>
+	<title>pixi my example 1</title>
+	<style type="text/css">
+body{
+	margin: 0;
+	padding:0;
+	overflow: 0;
+	background-color: #000000;
+}
+	</style>
+	<script type="text/javascript" src="../../bin/pixi.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+   var stage =new PIXI.Stage(0x66FF99,true);
+
+   var renderer=PIXI.autoDetectRenderer(400,300);
+
+   document.body.appendChild(renderer.view);
+
+   requestAnimFrame(animate);
+
+   var texture=PIXI.Texture.fromImage("bunny.png");
+
+   var bunny =new PIXI.Sprite(texture);
+
+   bunny.anchor.x=0.5;
+   bunny.anchor.y=0.5;
+   bunny.position.x=200;
+   bunny.position.y=150;
+   bunny.buttonMode = true;
+   bunny.interactive=true;
+   bunny.tap=bunny.click=function(data){
+    console.log(data,"click");
+    bunny.position.y+=50;
+   }
+
+   stage.addChild(bunny);
+
+    // add a logo!
+	var pixiLogo = PIXI.Sprite.fromImage("pixi.png");
+	stage.addChild(pixiLogo);
+
+	pixiLogo.buttonMode = true;
+
+	pixiLogo.position.x = 62 - 56;
+	pixiLogo.position.y = 40 - 32;
+
+	pixiLogo.click = pixiLogo.tap = function() {
+		window.open("http://www.pixijs.com", '_blank');
+	};
+   function animate () {
+   	requestAnimFrame(animate);
+   	bunny.rotation+=0.1;
+   	bunny.position.x+=1;
+   	if(bunny.position.x>300){
+   		bunny.position.x=0
+   	}
+   	renderer.render(stage);
+   }
+</script>
+</body>
+</html>
